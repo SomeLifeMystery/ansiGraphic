@@ -95,8 +95,10 @@ extern "C" {
 				ansigraphic_color_RGB_t* bgColor);
   ansigraphic_image_t* ansigraphic_readBmp(char* fileName);
   ansigraphic_image_RGB_t* ansigraphic_readBmp_RGB(char* fileName);
-  void ansigraphic_spritePrint(ansigraphic_image_t* dest, ansigraphic_sprite_t* src);
-  void ansigraphic_spritePrint_RGB(ansigraphic_image_RGB_t* dest, ansigraphic_sprite_RGB_t* src);
+  void ansigraphic_spritePrint(ansigraphic_image_t* dest,
+			       ansigraphic_sprite_t* src);
+  void ansigraphic_spritePrint_RGB(ansigraphic_image_RGB_t* dest,
+				   ansigraphic_sprite_RGB_t* src);
 #ifdef _cplusplus
 }
 #endif
