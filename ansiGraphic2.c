@@ -93,99 +93,103 @@ void ansigraphic_imagePrint_RGB(ansigraphic_image_RGB_t* image) {
 
 void ansigraphic_imageClear(ansigraphic_image_t* image) {
   int32_t x, y, width=image->width, height=image->height;
-
+  char* pixel;
+  
   y = -1;
   while (++y < height) {
     x = -1;
     while (++x < width) {
-      image->pixels[x + (y*width)].pixel[0] = '\033';
-      image->pixels[x + (y*width)].pixel[1] = '[';
-      image->pixels[x + (y*width)].pixel[2] = '3';
-      image->pixels[x + (y*width)].pixel[3] = '8';
-      image->pixels[x + (y*width)].pixel[4] = ';';
-      image->pixels[x + (y*width)].pixel[5] = '5';
-      image->pixels[x + (y*width)].pixel[6] = ';';
-      image->pixels[x + (y*width)].pixel[7] = '0';
-      image->pixels[x + (y*width)].pixel[8] = '0';
-      image->pixels[x + (y*width)].pixel[9] = '0';
-      image->pixels[x + (y*width)].pixel[10] = ';';
-      image->pixels[x + (y*width)].pixel[11] = '4';
-      image->pixels[x + (y*width)].pixel[12] = '8';
-      image->pixels[x + (y*width)].pixel[13] = ';';
-      image->pixels[x + (y*width)].pixel[14] = '5';
-      image->pixels[x + (y*width)].pixel[15] = ';';
-      image->pixels[x + (y*width)].pixel[16] = '0';
-      image->pixels[x + (y*width)].pixel[17] = '0';
-      image->pixels[x + (y*width)].pixel[18] = '0';
-      image->pixels[x + (y*width)].pixel[19] = 'm';
-      image->pixels[x + (y*width)].pixel[20] = ' ';
+      pixel = image->pixels[x + (y*width)].pixel;
+      pixel[0] = '\033';
+      pixel[1] = '[';
+      pixel[2] = '3';
+      pixel[3] = '8';
+      pixel[4] = ';';
+      pixel[5] = '5';
+      pixel[6] = ';';
+      pixel[7] = '0';
+      pixel[8] = '0';
+      pixel[9] = '0';
+      pixel[10] = ';';
+      pixel[11] = '4';
+      pixel[12] = '8';
+      pixel[13] = ';';
+      pixel[14] = '5';
+      pixel[15] = ';';
+      pixel[16] = '0';
+      pixel[17] = '0';
+      pixel[18] = '0';
+      pixel[19] = 'm';
+      pixel[20] = ' ';
       if (x + 1 < width) {
-	image->pixels[x + (y*width)].pixel[21] = 0;
+	pixel[21] = 0;
       } else {
-	image->pixels[x + (y*width)].pixel[21] = '\n';
+	pixel[21] = '\n';
       }
-      image->pixels[x + (y*width)].pixel[22] = '\033';
-      image->pixels[x + (y*width)].pixel[23] = '[';
-      image->pixels[x + (y*width)].pixel[24] = '0';
-      image->pixels[x + (y*width)].pixel[25] = 'm';
+      pixel[22] = '\033';
+      pixel[23] = '[';
+      pixel[24] = '0';
+      pixel[25] = 'm';
     }
   }
 }
 
 void ansigraphic_imageClear_RGB(ansigraphic_image_RGB_t* image) {
   int32_t x, y, width=image->width, height=image->height;
+  char* pixel;
 
   y = -1;
   while (++y < height) {
     x = -1;
     while (++x < width) {
-      image->pixels[x + (y*width)].pixel[0] = '\033';
-      image->pixels[x + (y*width)].pixel[1] = '[';
-      image->pixels[x + (y*width)].pixel[2] = '3';
-      image->pixels[x + (y*width)].pixel[3] = '8';
-      image->pixels[x + (y*width)].pixel[4] = ';';
-      image->pixels[x + (y*width)].pixel[5] = '2';
-      image->pixels[x + (y*width)].pixel[6] = ';';
-      image->pixels[x + (y*width)].pixel[7] = '0';
-      image->pixels[x + (y*width)].pixel[8] = '0';
-      image->pixels[x + (y*width)].pixel[9] = '0';
-      image->pixels[x + (y*width)].pixel[10] = ';';
-      image->pixels[x + (y*width)].pixel[11] = '0';
-      image->pixels[x + (y*width)].pixel[12] = '0';
-      image->pixels[x + (y*width)].pixel[13] = '0';
-      image->pixels[x + (y*width)].pixel[14] = ';';
-      image->pixels[x + (y*width)].pixel[15] = '0';
-      image->pixels[x + (y*width)].pixel[16] = '0';
-      image->pixels[x + (y*width)].pixel[17] = '0';
-      image->pixels[x + (y*width)].pixel[18] = ';';
-      image->pixels[x + (y*width)].pixel[19] = '4';
-      image->pixels[x + (y*width)].pixel[20] = '8';
-      image->pixels[x + (y*width)].pixel[21] = ';';
-      image->pixels[x + (y*width)].pixel[22] = '2';
-      image->pixels[x + (y*width)].pixel[23] = ';';
-      image->pixels[x + (y*width)].pixel[24] = '0';
-      image->pixels[x + (y*width)].pixel[25] = '0';
-      image->pixels[x + (y*width)].pixel[26] = '0';
-      image->pixels[x + (y*width)].pixel[27] = ';';
-      image->pixels[x + (y*width)].pixel[28] = '0';
-      image->pixels[x + (y*width)].pixel[29] = '0';
-      image->pixels[x + (y*width)].pixel[30] = '0';
-      image->pixels[x + (y*width)].pixel[31] = ';';
-      image->pixels[x + (y*width)].pixel[32] = '0';
-      image->pixels[x + (y*width)].pixel[33] = '0';
-      image->pixels[x + (y*width)].pixel[34] = '0';
-      image->pixels[x + (y*width)].pixel[35] = 'm';
-      image->pixels[x + (y*width)].pixel[36] = ' ';
-      image->pixels[x + (y*width)].pixel[37] = '\033';
-      image->pixels[x + (y*width)].pixel[38] = '[';
-      image->pixels[x + (y*width)].pixel[39] = '0';
-      image->pixels[x + (y*width)].pixel[40] = 'm';
+      pixel = image->pixels[x + (y*width)].pixel;
+      pixel[0] = '\033';
+      pixel[1] = '[';
+      pixel[2] = '3';
+      pixel[3] = '8';
+      pixel[4] = ';';
+      pixel[5] = '2';
+      pixel[6] = ';';
+      pixel[7] = '0';
+      pixel[8] = '0';
+      pixel[9] = '0';
+      pixel[10] = ';';
+      pixel[11] = '0';
+      pixel[12] = '0';
+      pixel[13] = '0';
+      pixel[14] = ';';
+      pixel[15] = '0';
+      pixel[16] = '0';
+      pixel[17] = '0';
+      pixel[18] = ';';
+      pixel[19] = '4';
+      pixel[20] = '8';
+      pixel[21] = ';';
+      pixel[22] = '2';
+      pixel[23] = ';';
+      pixel[24] = '0';
+      pixel[25] = '0';
+      pixel[26] = '0';
+      pixel[27] = ';';
+      pixel[28] = '0';
+      pixel[29] = '0';
+      pixel[30] = '0';
+      pixel[31] = ';';
+      pixel[32] = '0';
+      pixel[33] = '0';
+      pixel[34] = '0';
+      pixel[35] = 'm';
+      pixel[36] = ' ';
+      pixel[37] = '\033';
+      pixel[38] = '[';
+      pixel[39] = '0';
+      pixel[40] = 'm';
       if (x + 1 < width) {
-	image->pixels[x + (y*width)].pixel[41] = 0;
-	image->pixels[x + (y*width)].pixel[42] = 0;
+	pixel[41] = 0;
+	pixel[42] = 0;
       } else {
-	image->pixels[x + (y*width)].pixel[41] = '\r';
-	image->pixels[x + (y*width)].pixel[42] = '\n';
+	pixel[41] = '\r';
+	pixel[42] = '\n';
       }
     }
   }
@@ -211,6 +215,8 @@ void ansigraphic_image_RGB_reverse(ansigraphic_image_RGB_t* image) {
 ansigraphic_image_t* ansigraphic_newImage(int32_t width,
 					  int32_t height) {
   ansigraphic_image_t* image = (ansigraphic_image_t*)malloc(sizeof(ansigraphic_image_t));
+  int32_t x, y;
+  char* pixel;
   if (image == 0)
     return 0;
   else if ((image->pixels = (ansigraphic_pixel_t*)malloc(sizeof(ansigraphic_pixel_t)*width*height)) == 0) {
@@ -219,44 +225,43 @@ ansigraphic_image_t* ansigraphic_newImage(int32_t width,
   }
   image->width = width;
   image->height = height;
-  int32_t x, y;
 
   write(1, "\033[2J\033[0;0f\033[s", 13);
- 
   y = -1;
   while (++y < height) {
     x = -1;
     while (++x < width) {
-      image->pixels[x + (y*width)].pixel[0] = '\033';
-      image->pixels[x + (y*width)].pixel[1] = '[';
-      image->pixels[x + (y*width)].pixel[2] = '3';
-      image->pixels[x + (y*width)].pixel[3] = '8';
-      image->pixels[x + (y*width)].pixel[4] = ';';
-      image->pixels[x + (y*width)].pixel[5] = '5';
-      image->pixels[x + (y*width)].pixel[6] = ';';
-      image->pixels[x + (y*width)].pixel[7] = '0';
-      image->pixels[x + (y*width)].pixel[8] = '0';
-      image->pixels[x + (y*width)].pixel[9] = '0';
-      image->pixels[x + (y*width)].pixel[10] = ';';
-      image->pixels[x + (y*width)].pixel[11] = '4';
-      image->pixels[x + (y*width)].pixel[12] = '8';
-      image->pixels[x + (y*width)].pixel[13] = ';';
-      image->pixels[x + (y*width)].pixel[14] = '5';
-      image->pixels[x + (y*width)].pixel[15] = ';';
-      image->pixels[x + (y*width)].pixel[16] = '0';
-      image->pixels[x + (y*width)].pixel[17] = '0';
-      image->pixels[x + (y*width)].pixel[18] = '0';
-      image->pixels[x + (y*width)].pixel[19] = 'm';
-      image->pixels[x + (y*width)].pixel[20] = ' ';
+      pixel = image->pixels[x + (y*width)].pixel;
+      pixel[0] = '\033';
+      pixel[1] = '[';
+      pixel[2] = '3';
+      pixel[3] = '8';
+      pixel[4] = ';';
+      pixel[5] = '5';
+      pixel[6] = ';';
+      pixel[7] = '0';
+      pixel[8] = '0';
+      pixel[9] = '0';
+      pixel[10] = ';';
+      pixel[11] = '4';
+      pixel[12] = '8';
+      pixel[13] = ';';
+      pixel[14] = '5';
+      pixel[15] = ';';
+      pixel[16] = '0';
+      pixel[17] = '0';
+      pixel[18] = '0';
+      pixel[19] = 'm';
+      pixel[20] = ' ';
       if (x + 1 < width) {
-	image->pixels[x + (y*width)].pixel[21] = 0;
+	pixel[21] = 0;
       } else {
-	image->pixels[x + (y*width)].pixel[21] = '\n';
+	pixel[21] = '\n';
       }
-      image->pixels[x + (y*width)].pixel[22] = '\033';
-      image->pixels[x + (y*width)].pixel[23] = '[';
-      image->pixels[x + (y*width)].pixel[24] = '0';
-      image->pixels[x + (y*width)].pixel[25] = 'm';
+      pixel[22] = '\033';
+      pixel[23] = '[';
+      pixel[24] = '0';
+      pixel[25] = 'm';
     }
   }
   return image;
@@ -265,6 +270,8 @@ ansigraphic_image_t* ansigraphic_newImage(int32_t width,
 ansigraphic_image_RGB_t* ansigraphic_newImage_RGB(int32_t width,
 						  int32_t height) {
   ansigraphic_image_RGB_t* image = (ansigraphic_image_RGB_t*)malloc(sizeof(ansigraphic_image_RGB_t));
+  int32_t x, y;
+  char* pixel;
   if (image == 0)
     return 0;
   else if ((image->pixels = (ansigraphic_pixel_RGB_t*)malloc(sizeof(ansigraphic_pixel_RGB_t)*width*height)) == 0) {
@@ -273,7 +280,6 @@ ansigraphic_image_RGB_t* ansigraphic_newImage_RGB(int32_t width,
   }
   image->width = width;
   image->height = height;
-  int32_t x, y;
 
   write(1, "\033[2J\033[0;0f\033[s", 13);
   
@@ -281,53 +287,54 @@ ansigraphic_image_RGB_t* ansigraphic_newImage_RGB(int32_t width,
   while (++y < height) {
     x = -1;
     while (++x < width) {
-      image->pixels[x + (y*width)].pixel[0] = '\033';
-      image->pixels[x + (y*width)].pixel[1] = '[';
-      image->pixels[x + (y*width)].pixel[2] = '3';
-      image->pixels[x + (y*width)].pixel[3] = '8';
-      image->pixels[x + (y*width)].pixel[4] = ';';
-      image->pixels[x + (y*width)].pixel[5] = '2';
-      image->pixels[x + (y*width)].pixel[6] = ';';
-      image->pixels[x + (y*width)].pixel[7] = '0';
-      image->pixels[x + (y*width)].pixel[8] = '0';
-      image->pixels[x + (y*width)].pixel[9] = '0';
-      image->pixels[x + (y*width)].pixel[10] = ';';
-      image->pixels[x + (y*width)].pixel[11] = '0';
-      image->pixels[x + (y*width)].pixel[12] = '0';
-      image->pixels[x + (y*width)].pixel[13] = '0';
-      image->pixels[x + (y*width)].pixel[14] = ';';
-      image->pixels[x + (y*width)].pixel[15] = '0';
-      image->pixels[x + (y*width)].pixel[16] = '0';
-      image->pixels[x + (y*width)].pixel[17] = '0';
-      image->pixels[x + (y*width)].pixel[18] = ';';
-      image->pixels[x + (y*width)].pixel[19] = '4';
-      image->pixels[x + (y*width)].pixel[20] = '8';
-      image->pixels[x + (y*width)].pixel[21] = ';';
-      image->pixels[x + (y*width)].pixel[22] = '2';
-      image->pixels[x + (y*width)].pixel[23] = ';';
-      image->pixels[x + (y*width)].pixel[24] = '0';
-      image->pixels[x + (y*width)].pixel[25] = '0';
-      image->pixels[x + (y*width)].pixel[26] = '0';
-      image->pixels[x + (y*width)].pixel[27] = ';';
-      image->pixels[x + (y*width)].pixel[28] = '0';
-      image->pixels[x + (y*width)].pixel[29] = '0';
-      image->pixels[x + (y*width)].pixel[30] = '0';
-      image->pixels[x + (y*width)].pixel[31] = ';';
-      image->pixels[x + (y*width)].pixel[32] = '0';
-      image->pixels[x + (y*width)].pixel[33] = '0';
-      image->pixels[x + (y*width)].pixel[34] = '0';
-      image->pixels[x + (y*width)].pixel[35] = 'm';
-      image->pixels[x + (y*width)].pixel[36] = ' ';
-      image->pixels[x + (y*width)].pixel[37] = '\033';
-      image->pixels[x + (y*width)].pixel[38] = '[';
-      image->pixels[x + (y*width)].pixel[39] = '0';
-      image->pixels[x + (y*width)].pixel[40] = 'm';
+      pixel = image->pixels[x + (y*width)].pixel;
+      pixel[0] = '\033';
+      pixel[1] = '[';
+      pixel[2] = '3';
+      pixel[3] = '8';
+      pixel[4] = ';';
+      pixel[5] = '2';
+      pixel[6] = ';';
+      pixel[7] = '0';
+      pixel[8] = '0';
+      pixel[9] = '0';
+      pixel[10] = ';';
+      pixel[11] = '0';
+      pixel[12] = '0';
+      pixel[13] = '0';
+      pixel[14] = ';';
+      pixel[15] = '0';
+      pixel[16] = '0';
+      pixel[17] = '0';
+      pixel[18] = ';';
+      pixel[19] = '4';
+      pixel[20] = '8';
+      pixel[21] = ';';
+      pixel[22] = '2';
+      pixel[23] = ';';
+      pixel[24] = '0';
+      pixel[25] = '0';
+      pixel[26] = '0';
+      pixel[27] = ';';
+      pixel[28] = '0';
+      pixel[29] = '0';
+      pixel[30] = '0';
+      pixel[31] = ';';
+      pixel[32] = '0';
+      pixel[33] = '0';
+      pixel[34] = '0';
+      pixel[35] = 'm';
+      pixel[36] = ' ';
+      pixel[37] = '\033';
+      pixel[38] = '[';
+      pixel[39] = '0';
+      pixel[40] = 'm';
       if (x + 1 < width) {
-	image->pixels[x + (y*width)].pixel[41] = 0;
-	image->pixels[x + (y*width)].pixel[42] = 0;
+	pixel[41] = 0;
+	pixel[42] = 0;
       } else {
-	image->pixels[x + (y*width)].pixel[41] = '\r';
-	image->pixels[x + (y*width)].pixel[42] = '\n';
+	pixel[41] = '\r';
+	pixel[42] = '\n';
       }
     }
   }
