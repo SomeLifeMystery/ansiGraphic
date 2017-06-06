@@ -18,7 +18,7 @@ extern "C" {
   } ansigraphic_dvector2_t;
 
   typedef struct s_ansigraphic_pixel {
-    char pixel[26];
+    char pixel[27];
   } ansigraphic_pixel_t;
 
   typedef struct s_ansigraphic_pixel_RGB {

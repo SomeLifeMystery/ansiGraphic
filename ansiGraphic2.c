@@ -100,36 +100,13 @@ void ansigraphic_imageClear(ansigraphic_image_t* image) {
     x = -1;
     while (++x < width) {
       pixel = image->pixels[x + (y*width)].pixel;
-      pixel[0] = '\033';
-      pixel[1] = '[';
-      pixel[2] = '3';
-      pixel[3] = '8';
-      pixel[4] = ';';
-      pixel[5] = '5';
-      pixel[6] = ';';
       pixel[7] = '0';
       pixel[8] = '0';
       pixel[9] = '0';
-      pixel[10] = ';';
-      pixel[11] = '4';
-      pixel[12] = '8';
-      pixel[13] = ';';
-      pixel[14] = '5';
-      pixel[15] = ';';
       pixel[16] = '0';
       pixel[17] = '0';
       pixel[18] = '0';
-      pixel[19] = 'm';
       pixel[20] = ' ';
-      if (x + 1 < width) {
-	pixel[21] = 0;
-      } else {
-	pixel[21] = '\n';
-      }
-      pixel[22] = '\033';
-      pixel[23] = '[';
-      pixel[24] = '0';
-      pixel[25] = 'm';
     }
   }
 }
@@ -143,54 +120,25 @@ void ansigraphic_imageClear_RGB(ansigraphic_image_RGB_t* image) {
     x = -1;
     while (++x < width) {
       pixel = image->pixels[x + (y*width)].pixel;
-      pixel[0] = '\033';
-      pixel[1] = '[';
-      pixel[2] = '3';
-      pixel[3] = '8';
-      pixel[4] = ';';
-      pixel[5] = '2';
-      pixel[6] = ';';
       pixel[7] = '0';
       pixel[8] = '0';
       pixel[9] = '0';
-      pixel[10] = ';';
       pixel[11] = '0';
       pixel[12] = '0';
       pixel[13] = '0';
-      pixel[14] = ';';
       pixel[15] = '0';
       pixel[16] = '0';
       pixel[17] = '0';
-      pixel[18] = ';';
-      pixel[19] = '4';
-      pixel[20] = '8';
-      pixel[21] = ';';
-      pixel[22] = '2';
-      pixel[23] = ';';
       pixel[24] = '0';
       pixel[25] = '0';
       pixel[26] = '0';
-      pixel[27] = ';';
       pixel[28] = '0';
       pixel[29] = '0';
       pixel[30] = '0';
-      pixel[31] = ';';
       pixel[32] = '0';
       pixel[33] = '0';
       pixel[34] = '0';
-      pixel[35] = 'm';
       pixel[36] = ' ';
-      pixel[37] = '\033';
-      pixel[38] = '[';
-      pixel[39] = '0';
-      pixel[40] = 'm';
-      if (x + 1 < width) {
-	pixel[41] = 0;
-	pixel[42] = 0;
-      } else {
-	pixel[41] = '\r';
-	pixel[42] = '\n';
-      }
     }
   }
 }
@@ -253,15 +201,17 @@ ansigraphic_image_t* ansigraphic_newImage(int32_t width,
       pixel[18] = '0';
       pixel[19] = 'm';
       pixel[20] = ' ';
+      pixel[21] = '\033';
+      pixel[22] = '[';
+      pixel[23] = '0';
+      pixel[24] = 'm';
       if (x + 1 < width) {
-	pixel[21] = 0;
+	pixel[25] = 0;
+	pixel[26] = 0;
       } else {
-	pixel[21] = '\n';
+	pixel[25] = '\n';
+	pixel[26] = '\n';
       }
-      pixel[22] = '\033';
-      pixel[23] = '[';
-      pixel[24] = '0';
-      pixel[25] = 'm';
     }
   }
   return image;
