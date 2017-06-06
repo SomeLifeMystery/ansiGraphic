@@ -391,7 +391,7 @@ void ansigraphic_drawLine(ansigraphic_image_t* image,
       disy -= dd;
     }
   } else {
-    double dd=(disy / disx);
+    double dd=1/(disy / disx);
     while (disx > 0 || disy > 0) {
       xy.x = (int)xa;
       xy.y = (int)ya;
@@ -430,7 +430,7 @@ void ansigraphic_drawLine_RGB(ansigraphic_image_RGB_t* image,
       disy -= dd;
     }
   } else {
-    double dd=(disy / disx);
+    double dd=1/(disy / disx);
     while (disx > 0 || disy > 0) {
       xy.x = (int)xa;
       xy.y = (int)ya;
