@@ -209,7 +209,7 @@ ansigraphic_image_t* ansigraphic_newImage(int32_t width,
 	pixel[25] = 0;
 	pixel[26] = 0;
       } else {
-	pixel[25] = '\n';
+	pixel[25] = '\r';
 	pixel[26] = '\n';
       }
     }
