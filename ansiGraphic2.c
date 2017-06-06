@@ -379,7 +379,7 @@ void ansigraphic_drawLine(ansigraphic_image_t* image,
   ansigraphic_ivector2_t xy;
   
   if (disx > disy) {
-    double dd=(disx / disy);
+    double dd=1/(disx / disy);
     while (disx > 0 || disy > 0) {
       xy.x = (int)xa;
       xy.y = (int)ya;
@@ -387,8 +387,8 @@ void ansigraphic_drawLine(ansigraphic_image_t* image,
       ansigraphic_pixelSetValue(image, &xy, value);
       xa -= sx*1;
       disx -= 1;
-      ya -= sy*(1/dd);
-      disy -= 1/dd;
+      ya -= sy*dd;
+      disy -= dd;
     }
   } else {
     double dd=(disy / disx);
@@ -397,8 +397,8 @@ void ansigraphic_drawLine(ansigraphic_image_t* image,
       xy.y = (int)ya;
       ansigraphic_pixelSetColor(image, &xy, fgColor, bgColor);
       ansigraphic_pixelSetValue(image, &xy, value);
-      xa -= sx*(1/dd);
-      disx -= 1/dd;
+      xa -= sx*dd;
+      disx -= dd;
       ya -= sy*1;
       disy -= 1;
     }
@@ -418,7 +418,7 @@ void ansigraphic_drawLine_RGB(ansigraphic_image_RGB_t* image,
   ansigraphic_ivector2_t xy;
 
   if (disx > disy) {
-    double dd=(disx / disy);
+    double dd=1/(disx / disy);
     while (disx > 0 || disy > 0) {
       xy.x = (int)xa;
       xy.y = (int)ya;
@@ -426,8 +426,8 @@ void ansigraphic_drawLine_RGB(ansigraphic_image_RGB_t* image,
       ansigraphic_pixelSetValue_RGB(image, &xy, value);
       xa -= sx*1;
       disx -= 1;
-      ya -= sy*(1/dd);
-      disy -= 1/dd;
+      ya -= sy*dd;
+      disy -= dd;
     }
   } else {
     double dd=(disy / disx);
@@ -436,8 +436,8 @@ void ansigraphic_drawLine_RGB(ansigraphic_image_RGB_t* image,
       xy.y = (int)ya;
       ansigraphic_pixelSetColor_RGB(image, &xy, fgColor, bgColor);
       ansigraphic_pixelSetValue_RGB(image, &xy, value);
-      xa -= sx*(1/dd);
-      disx -= 1/dd;
+      xa -= sx*dd;
+      disx -= dd;
       ya -= sy*1;
       disy -= 1;
     }
