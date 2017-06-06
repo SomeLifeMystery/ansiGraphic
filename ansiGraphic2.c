@@ -384,6 +384,7 @@ void ansigraphic_drawLine(ansigraphic_image_t* image,
       xy.x = (int)xa;
       xy.y = (int)ya;
       ansigraphic_pixelSetColor(image, &xy, fgColor, bgColor);
+      ansigraphic_pixelSetValue(image, &xy, value);
       xa -= sx*1;
       disx -= 1;
       ya -= sy*(1/dd);
@@ -395,6 +396,7 @@ void ansigraphic_drawLine(ansigraphic_image_t* image,
       xy.x = (int)xa;
       xy.y = (int)ya;
       ansigraphic_pixelSetColor(image, &xy, fgColor, bgColor);
+      ansigraphic_pixelSetValue(image, &xy, value);
       xa -= sx*(1/dd);
       disx -= 1/dd;
       ya -= sy*1;
@@ -421,6 +423,7 @@ void ansigraphic_drawLine_RGB(ansigraphic_image_RGB_t* image,
       xy.x = (int)xa;
       xy.y = (int)ya;
       ansigraphic_pixelSetColor_RGB(image, &xy, fgColor, bgColor);
+      ansigraphic_pixelSetValue_RGB(image, &xy, value);
       xa -= sx*1;
       disx -= 1;
       ya -= sy*(1/dd);
@@ -432,6 +435,7 @@ void ansigraphic_drawLine_RGB(ansigraphic_image_RGB_t* image,
       xy.x = (int)xa;
       xy.y = (int)ya;
       ansigraphic_pixelSetColor_RGB(image, &xy, fgColor, bgColor);
+      ansigraphic_pixelSetValue_RGB(image, &xy, value);
       xa -= sx*(1/dd);
       disx -= 1/dd;
       ya -= sy*1;
