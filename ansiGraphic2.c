@@ -339,19 +339,13 @@ void ansigraphic_color_RGB_set(ansigraphic_color_RGB_t* color,
 			       int green,
 			       int blue) {
   char tmp[4];
-
-  if (red >= 0 && red <= 255) {
-    snprintf(tmp, 4, "%03d", red);
-    memcpy((*color)[0], tmp, 3);
-  }
-  if (green >= 0 && green <= 255) {
-    snprintf(tmp, 4, "%03d", green);
-    memcpy((*color)[1], tmp, 3);
-  }
-  if (blue >= 0 && blue <= 255) {
-    snprintf(tmp, 4, "%03d", blue);
-    memcpy((*color)[2], tmp, 3);
-  }
+  
+  snprintf(tmp, 4, "%03d", red);
+  memcpy((*color)[0], tmp, 3);
+  snprintf(tmp, 4, "%03d", green);
+  memcpy((*color)[1], tmp, 3);
+  snprintf(tmp, 4, "%03d", blue);
+  memcpy((*color)[2], tmp, 3);
 }
 
 void ansigraphic_color_RGB_reverse(ansigraphic_color_RGB_t* color) {
