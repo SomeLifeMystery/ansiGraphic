@@ -5,9 +5,9 @@
 #include "ansiGraphic2.h" 
 
 void ansigraphic_pixelSetColor(ansigraphic_image_t* image,
-			       const ansigraphic_ivector2_t* xy,
-			       const char* fgColor,
-			       const char* bgColor) {
+			       ansigraphic_ivector2_t* xy,
+			       char* fgColor,
+			       char* bgColor) {
   char* pixel = image->pixels[xy->x + ((image->height-1-xy->y)*image->width)].pixel;
   pixel[7] = fgColor[0];
   pixel[8] = fgColor[1];
@@ -18,9 +18,9 @@ void ansigraphic_pixelSetColor(ansigraphic_image_t* image,
 }
 
 void ansigraphic_pixelSetColor_RGB(ansigraphic_image_RGB_t* image,
-				   const ansigraphic_ivector2_t* xy,
-				   const ansigraphic_color_RGB_t* fgColor,
-				   const ansigraphic_color_RGB_t* bgColor) {
+				   ansigraphic_ivector2_t* xy,
+				   ansigraphic_color_RGB_t* fgColor,
+				   ansigraphic_color_RGB_t* bgColor) {
   char* pixel = image->pixels[xy->x + ((image->height-1-xy->y)*image->width)].pixel;
   pixel[7] = (*fgColor)[0][0];
   pixel[8] = (*fgColor)[0][1];
@@ -42,8 +42,8 @@ void ansigraphic_pixelSetColor_RGB(ansigraphic_image_RGB_t* image,
   pixel[34] = (*bgColor)[2][2];
 }
 
-void ansigraphic_pixelGetColor_RGB(const ansigraphic_image_RGB_t* image,
-				   const ansigraphic_ivector2_t* xy,
+void ansigraphic_pixelGetColor_RGB(ansigraphic_image_RGB_t* image,
+				   ansigraphic_ivector2_t* xy,
 				   ansigraphic_color_RGB_t* fgColor,
 				   ansigraphic_color_RGB_t* bgColor) {
   char* pixel = image->pixels[xy->x + ((image->height-1-xy->y)*image->width)].pixel;
@@ -68,15 +68,15 @@ void ansigraphic_pixelGetColor_RGB(const ansigraphic_image_RGB_t* image,
 }
 
 void ansigraphic_pixelSetValue(ansigraphic_image_t* image,
-			       const ansigraphic_ivector2_t* xy,
-			       const char value) {
+			       ansigraphic_ivector2_t* xy,
+			       char value) {
   char* pixel = image->pixels[xy->x + ((image->height-1-xy->y)*image->width)].pixel;
   pixel[20] = value;
 }
 
 void ansigraphic_pixelSetValue_RGB(ansigraphic_image_RGB_t* image,
-				   const ansigraphic_ivector2_t* xy,
-				   const char value) {
+				   ansigraphic_ivector2_t* xy,
+				   char value) {
   char* pixel = image->pixels[xy->x + ((image->height-1-xy->y)*image->width)].pixel;
   pixel[36] = value;
 }
@@ -373,11 +373,11 @@ void ansigraphic_color_RGB_reverse(ansigraphic_color_RGB_t* color) {
 }
 
 void ansigraphic_drawLine(ansigraphic_image_t* image,
-			  const ansigraphic_dvector2_t* start,
-			  const ansigraphic_dvector2_t* end,
+			  ansigraphic_dvector2_t* start,
+			  ansigraphic_dvector2_t* end,
 			  char value,
-			  const char* fgColor,
-			  const char* bgColor) {
+			  char* fgColor,
+			  char* bgColor) {
   double delx=start->x-end->x, dely=start->y-end->y;
   double sx=(delx < 0 ? -1 : 1), sy=(dely < 0 ? -1 : 1);
   double disx=(delx < 0 ? -delx : delx), disy=(dely < 0 ? -dely : dely);
@@ -410,11 +410,11 @@ void ansigraphic_drawLine(ansigraphic_image_t* image,
 }
 
 void ansigraphic_drawLine_RGB(ansigraphic_image_RGB_t* image,
-			      const ansigraphic_dvector2_t* start,
-			      const ansigraphic_dvector2_t* end,
+			      ansigraphic_dvector2_t* start,
+			      ansigraphic_dvector2_t* end,
 			      char value,
-			      const ansigraphic_color_RGB_t* fgColor,
-			      const ansigraphic_color_RGB_t* bgColor) {
+			      ansigraphic_color_RGB_t* fgColor,
+			      ansigraphic_color_RGB_t* bgColor) {
   double delx=start->x-end->x, dely=start->y-end->y;
   double sx=(delx < 0 ? -1 : 1), sy=(dely < 0 ? -1 : 1);
   double disx=(delx < 0 ? -delx : delx), disy=(dely < 0 ? -dely : dely);
@@ -446,7 +446,7 @@ void ansigraphic_drawLine_RGB(ansigraphic_image_RGB_t* image,
   }
 }
 
-ansigraphic_image_t* ansigraphic_readBmp(const char* fileName) {
+ansigraphic_image_t* ansigraphic_readBmp(char* fileName) {
   int i;
   FILE* f = fopen(fileName, "rb");
   unsigned char info[54];
@@ -486,7 +486,7 @@ ansigraphic_image_t* ansigraphic_readBmp(const char* fileName) {
   return img;
 }
 
-ansigraphic_image_RGB_t* ansigraphic_readBmp_RGB(const char* fileName) {
+ansigraphic_image_RGB_t* ansigraphic_readBmp_RGB(char* fileName) {
   int i;
   FILE* f = fopen(fileName, "rb");
   unsigned char info[54];
@@ -525,7 +525,7 @@ ansigraphic_image_RGB_t* ansigraphic_readBmp_RGB(const char* fileName) {
   return img;
 }
 
-void ansigraphic_spritePrint(ansigraphic_image_t* dest, const ansigraphic_sprite_t* src) {
+void ansigraphic_spritePrint(ansigraphic_image_t* dest, ansigraphic_sprite_t* src) {
   int x, xlim;
   int y, ylim;
   char *pixelDest, *pixelSrc;
@@ -549,7 +549,7 @@ void ansigraphic_spritePrint(ansigraphic_image_t* dest, const ansigraphic_sprite
   }
 }
 
-void ansigraphic_spritePrint_RGB(ansigraphic_image_RGB_t* dest, const ansigraphic_sprite_RGB_t* src) {
+void ansigraphic_spritePrint_RGB(ansigraphic_image_RGB_t* dest, ansigraphic_sprite_RGB_t* src) {
   int x, xlim;
   int y, ylim;
   char *pixelDest, *pixelSrc;

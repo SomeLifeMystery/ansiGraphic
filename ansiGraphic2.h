@@ -50,23 +50,23 @@ extern "C" {
   } ansigraphic_sprite_RGB_t;
 
   void ansigraphic_pixelSetColor(ansigraphic_image_t* image,
-				 const ansigraphic_ivector2_t* xy,
-				 const char* fgColor,
-				 const char* bgColor);
+				 ansigraphic_ivector2_t* xy,
+				 char* fgColor,
+				 char* bgColor);
   void ansigraphic_pixelSetColor_RGB(ansigraphic_image_RGB_t* image,
-				     const ansigraphic_ivector2_t* xy,
-				     const ansigraphic_color_RGB_t* fgColor,
-				     const ansigraphic_color_RGB_t* bgColor);
-  void ansigraphic_pixelGetColor_RGB(const ansigraphic_image_RGB_t* image,
-				     const ansigraphic_ivector2_t* xy,
+				     ansigraphic_ivector2_t* xy,
+				     ansigraphic_color_RGB_t* fgColor,
+				     ansigraphic_color_RGB_t* bgColor);
+  void ansigraphic_pixelGetColor_RGB(ansigraphic_image_RGB_t* image,
+				     ansigraphic_ivector2_t* xy,
 				     ansigraphic_color_RGB_t* fgColor,
 				     ansigraphic_color_RGB_t* bgColor);
   void ansigraphic_pixelSetValue(ansigraphic_image_t* image,
-				 const ansigraphic_ivector2_t* xy,
-				 const char value);
+				 ansigraphic_ivector2_t* xy,
+				 char value);
   void ansigraphic_pixelSetValue_RGB(ansigraphic_image_RGB_t* image,
-				     const ansigraphic_ivector2_t* xy,
-				     const char value);
+				     ansigraphic_ivector2_t* xy,
+				     char value);
   void ansigraphic_imagePrint(ansigraphic_image_t* image);
   void ansigraphic_imagePrint_RGB(ansigraphic_image_RGB_t* image);
   void ansigraphic_imageClear(ansigraphic_image_t* image);
@@ -82,21 +82,21 @@ extern "C" {
 				 int blue);
   void ansigraphic_color_RGB_reverse(ansigraphic_color_RGB_t* color);
   void ansigraphic_drawLine(ansigraphic_image_t* image,
-			    const ansigraphic_dvector2_t* start,
-			    const ansigraphic_dvector2_t* end,
+			    ansigraphic_dvector2_t* start,
+			    ansigraphic_dvector2_t* end,
 			    char value,
-			    const char* fgColor,
-			    const char* bgColor);
+			    char* fgColor,
+			    char* bgColor);
   void ansigraphic_drawLine_RGB(ansigraphic_image_RGB_t* image,
-				const ansigraphic_dvector2_t* start,
-				const ansigraphic_dvector2_t* end,
+				ansigraphic_dvector2_t* start,
+				ansigraphic_dvector2_t* end,
 				char value,
-				const ansigraphic_color_RGB_t* fgColor,
-				const ansigraphic_color_RGB_t* bgColor);
-  ansigraphic_image_t* ansigraphic_readBmp(const char* fileName);
-  ansigraphic_image_RGB_t* ansigraphic_readBmp_RGB(const char* fileName);
-  void ansigraphic_spritePrint(ansigraphic_image_t* dest, const ansigraphic_sprite_t* src);
-  void ansigraphic_spritePrint_RGB(ansigraphic_image_RGB_t* dest, const ansigraphic_sprite_RGB_t* src);
+				ansigraphic_color_RGB_t* fgColor,
+				ansigraphic_color_RGB_t* bgColor);
+  ansigraphic_image_t* ansigraphic_readBmp(char* fileName);
+  ansigraphic_image_RGB_t* ansigraphic_readBmp_RGB(char* fileName);
+  void ansigraphic_spritePrint(ansigraphic_image_t* dest, ansigraphic_sprite_t* src);
+  void ansigraphic_spritePrint_RGB(ansigraphic_image_RGB_t* dest, ansigraphic_sprite_RGB_t* src);
 #ifdef _cplusplus
 }
 #endif
