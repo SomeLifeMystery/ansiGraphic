@@ -341,6 +341,15 @@ ansigraphic_image_RGB_t* ansigraphic_newImage_RGB(int32_t width,
   return image;
 }
 
+void ansigraphic_deleteImage(ansigraphic_image_t* image) {
+  free(image->pixels);
+  free(image);
+}
+void ansigraphic_deleteImage_RGB(ansigraphic_image_RGB_t* image) {
+  free(image->pixels);
+  free(image);
+}
+
 void ansigraphic_color_RGB_set(ansigraphic_color_RGB_t* color,
 			       int red,
 			       int green,

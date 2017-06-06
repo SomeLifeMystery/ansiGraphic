@@ -31,5 +31,6 @@ int main() {
     alpha+=1;
     beta+=3;
   }
+  ansigraphic_deleteImage_RGB(image);
   return 0;
 }

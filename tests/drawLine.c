@@ -29,5 +29,6 @@ int main() {
     alpha+=1;
     beta+=3;
   }
+  ansigraphic_deleteImage(image);
   return 0;
 }

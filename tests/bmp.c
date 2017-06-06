@@ -12,5 +12,7 @@ int main(int ac, char**av) {
     ansigraphic_image_RGB_reverse(imgrgb);
     usleep(10000);
   }
+  ansigraphic_deleteImage(img);
+  ansigraphic_deleteImage_RGB(imgrgb);
   return 0;
 }

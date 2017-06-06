@@ -76,6 +76,8 @@ extern "C" {
 					    int32_t height);
   ansigraphic_image_RGB_t* ansigraphic_newImage_RGB(int32_t width,
 						    int32_t height);
+  void ansigraphic_deleteImage(ansigraphic_image_t* image);
+  void ansigraphic_deleteImage_RGB(ansigraphic_image_RGB_t* image);
   void ansigraphic_color_RGB_set(ansigraphic_color_RGB_t* color,
 				 int red,
 				 int green,
