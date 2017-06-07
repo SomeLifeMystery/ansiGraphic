@@ -143,6 +143,30 @@ void ansigraphic_imageClear_RGB(ansigraphic_image_RGB_t* image) {
   }
 }
 
+void ansigraphic_image_reverse(ansigraphic_image_t* image) {
+  char tmp[3];
+  char* pixel;
+  ansigraphic_ivector2_t xy;
+  xy.y=0;
+  while (xy.y < image->height) {
+    xy.x = 0;
+    while (xy.x < image->width) {
+      pixel = image->pixels[xy.x + (xy.y*image->width)].pixel;
+      tmp[0] = pixel[7];
+      tmp[1] = pixel[8];
+      tmp[2] = pixel[9];
+      pixel[7] = pixel[16];
+      pixel[8] = pixel[17];
+      pixel[9] = pixel[18];
+      pixel[16] = tmp[0];
+      pixel[17] = tmp[1];
+      pixel[18] = tmp[2];
+      ++xy.x;
+    }
+    ++xy.y;
+  }
+}
+
 void ansigraphic_image_RGB_reverse(ansigraphic_image_RGB_t* image) {
   ansigraphic_color_RGB_t fg, bg;
   ansigraphic_ivector2_t xy;

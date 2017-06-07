@@ -22,9 +22,11 @@ int main() {
     end.x=start.x + radiusx*(cos(((int)(alpha)%360)*3.14/180.0));
     end.y=start.y + radiusy*(sin(((int)(alpha)%360)*3.14/180.0));
     ansigraphic_drawLine(image, &start, &end, '.', "015", "000");
+    ansigraphic_image_reverse(image);
     end.x=start.x + radiusbx*(cos(((int)(beta)%360)*3.14/180.0));
     end.y=start.y + radiusby*(sin(((int)(beta)%360)*3.14/180.0));
     ansigraphic_drawLine(image, &start, &end, '.', "015", "000");
+    ansigraphic_image_reverse(image);
     ansigraphic_imagePrint(image);
     alpha+=1;
     beta+=3;
