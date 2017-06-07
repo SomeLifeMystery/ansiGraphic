@@ -143,6 +143,64 @@ void ansigraphic_imageClear_RGB(ansigraphic_image_RGB_t* image) {
   }
 }
 
+void ansigraphic_imageFill(ansigraphic_image_t* image,
+			   char value,
+			   char* fgColor,
+			   char* bgColor) {
+  int32_t x, y, width=image->width, height=image->height;
+  char* pixel;
+  
+  y = -1;
+  while (++y < height) {
+    x = -1;
+    while (++x < width) {
+      pixel = image->pixels[x + (y*width)].pixel;
+      pixel[7] = fgColor[0];
+      pixel[8] = fgColor[1];
+      pixel[9] = fgColor[2];
+      pixel[16] = bgColor[0];
+      pixel[17] = bgColor[1];
+      pixel[18] = bgColor[2];
+      pixel[20] = value;
+    }
+  }
+}
+
+void ansigraphic_imageFill_RGB(ansigraphic_image_RGB_t* image,
+			       char value,
+			       ansigraphic_color_RGB_t* fgColor,
+			       ansigraphic_color_RGB_t* bgColor) {
+  int32_t x, y, width=image->width, height=image->height;
+  char* pixel;
+
+  y = -1;
+  while (++y < height) {
+    x = -1;
+    while (++x < width) {
+      pixel = image->pixels[x + (y*width)].pixel;
+      pixel[7] = (*fgColor)[0][0];
+      pixel[8] = (*fgColor)[0][1];
+      pixel[9] = (*fgColor)[0][2];
+      pixel[11] = (*fgColor)[1][0];
+      pixel[12] = (*fgColor)[1][1];
+      pixel[13] = (*fgColor)[1][2];
+      pixel[15] = (*fgColor)[2][0];
+      pixel[16] = (*fgColor)[2][1];
+      pixel[17] = (*fgColor)[2][2];
+      pixel[24] = (*bgColor)[0][0];
+      pixel[25] = (*bgColor)[0][1];
+      pixel[26] = (*bgColor)[0][2];
+      pixel[28] = (*bgColor)[1][0];
+      pixel[29] = (*bgColor)[1][1];
+      pixel[30] = (*bgColor)[1][2];
+      pixel[32] = (*bgColor)[2][0];
+      pixel[33] = (*bgColor)[2][1];
+      pixel[34] = (*bgColor)[2][2];
+      pixel[36] = value;
+    }
+  }
+}
+
 void ansigraphic_image_reverse(ansigraphic_image_t* image) {
   char tmp[3];
   char* pixel;

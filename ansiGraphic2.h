@@ -71,6 +71,14 @@ extern "C" {
   void ansigraphic_imagePrint_RGB(ansigraphic_image_RGB_t* image);
   void ansigraphic_imageClear(ansigraphic_image_t* image);
   void ansigraphic_imageClear_RGB(ansigraphic_image_RGB_t* image);
+  void ansigraphic_imageFill(ansigraphic_image_t* image,
+			     char value,
+			     char* fgColor,
+			     char* bgColor);
+  void ansigraphic_imageFill_RGB(ansigraphic_image_RGB_t* image,
+				 char value,
+				 ansigraphic_color_RGB_t* fgColor,
+				 ansigraphic_color_RGB_t* bgColor);
   void ansigraphic_image_reverse(ansigraphic_image_t* image);
   void ansigraphic_image_RGB_reverse(ansigraphic_image_RGB_t* image);
   ansigraphic_image_t* ansigraphic_newImage(int32_t width,
