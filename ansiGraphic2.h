@@ -49,6 +49,24 @@ extern "C" {
     ansigraphic_ivector2_t xy;
   } ansigraphic_sprite_RGB_t;
 
+  typedef struct s_ansigraphic_animatedSprite {
+    ansigraphic_image_t* imageFrames;
+    ansigraphic_image_t* currentFrame;
+    unsigned int nbFrames;
+    unsigned int frameRate;
+    unsigned int timer;
+    ansigraphic_ivector2_t xy;
+  } ansigraphic_animatedSprite_t;
+
+  typedef struct s_ansigraphic_animatedSprite_RGB {
+    ansigraphic_image_RGB_t* imageFrames;
+    ansigraphic_image_RGB_t* currentFrame;
+    unsigned int nbFrames;
+    unsigned int frameRate;
+    unsigned int timer;
+    ansigraphic_ivector2_t xy;
+  } ansigraphic_animatedSprite_RGB_t;
+
   void ansigraphic_pixelSetColor(ansigraphic_image_t* image,
 				 ansigraphic_ivector2_t* xy,
 				 char* fgColor,
