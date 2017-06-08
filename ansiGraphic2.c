@@ -630,3 +630,7 @@ void ansigraphic_spritePrint_RGB(ansigraphic_image_RGB_t* dest, ansigraphic_spri
     ++y;
   }
 }
+
+void ansigraphic_animatedSprite_pushFrame(ansigraphic_animatedSprite_t* aSprite,
+					  ansigraphic_image_t* image) {
+}

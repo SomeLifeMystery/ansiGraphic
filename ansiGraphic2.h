@@ -128,6 +128,13 @@ extern "C" {
 			       ansigraphic_sprite_t* src);
   void ansigraphic_spritePrint_RGB(ansigraphic_image_RGB_t* dest,
 				   ansigraphic_sprite_RGB_t* src);
+  ansigraphic_sprite_t* ansigraphic_newSprite(ansigraphic_image_t* image);
+  ansigraphic_sprite_RGB_t* ansigraphic_newSprite_RGB(ansigraphic_image_RGB_t* image);
+  void ansigraphic_deleteSprite(ansigraphic_sprite_t* sprite);
+  void ansigraphic_deleteSprite_RGB(ansigraphic_sprite_RGB_t* sprite);
+  void ansigraphic_animatedSprite_pushFrame(ansigraphic_animatedSprite_t* aSprite,
+					    ansigraphic_image_t* image);
+  
 #ifdef _cplusplus
 }
 #endif
