@@ -706,8 +706,24 @@ void ansigraphic_deleteAnimatedSprite_RGB(ansigraphic_animatedSprite_RGB_t* aSpr
 
 int ansigraphic_animatedSprite_pushFrame(ansigraphic_animatedSprite_t* aSprite,
 					 ansigraphic_image_t* image) {
+  if ((aSprite->imageFrames = realloc(aSprite->imageFrames,
+				      sizeof(ansigraphic_image_t*)*(aSprite->nbFrames+1))) == 0) {
+    aSprite->nbFrames = 0;
+    return -1;
+  }
+  aSprite->imageFrames[aSprite->nbFrames] = image;
+  aSprite->nbFrames += 1;
+  return 0;
 }
 
 int ansigraphic_animatedSprite_pushFrame_RGB(ansigraphic_animatedSprite_RGB_t* aSprite,
 					     ansigraphic_image_RGB_t* image) {
+  if ((aSprite->imageFrames = realloc(aSprite->imageFrames,
+				      sizeof(ansigraphic_image_RGB_t*)*(aSprite->nbFrames+1))) == 0) {
+    aSprite->nbFrames = 0;
+    return -1;
+  }
+  aSprite->imageFrames[aSprite->nbFrames] = image;
+  aSprite->nbFrames += 1;
+  return 0;
 }
