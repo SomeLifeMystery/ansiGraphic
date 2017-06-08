@@ -571,7 +571,8 @@ ansigraphic_image_RGB_t* ansigraphic_readBmp_RGB(char* fileName) {
   return img;
 }
 
-void ansigraphic_spritePrint(ansigraphic_image_t* dest, ansigraphic_sprite_t* src) {
+void ansigraphic_spritePrint(ansigraphic_image_t* dest,
+			     ansigraphic_sprite_t* src) {
   int x, xlim;
   int y, ylim;
   char *pixelDest, *pixelSrc;
@@ -595,7 +596,8 @@ void ansigraphic_spritePrint(ansigraphic_image_t* dest, ansigraphic_sprite_t* sr
   }
 }
 
-void ansigraphic_spritePrint_RGB(ansigraphic_image_RGB_t* dest, ansigraphic_sprite_RGB_t* src) {
+void ansigraphic_spritePrint_RGB(ansigraphic_image_RGB_t* dest,
+				 ansigraphic_sprite_RGB_t* src) {
   int x, xlim;
   int y, ylim;
   char *pixelDest, *pixelSrc;
@@ -713,6 +715,8 @@ int ansigraphic_animatedSprite_pushFrame(ansigraphic_animatedSprite_t* aSprite,
   }
   aSprite->imageFrames[aSprite->nbFrames] = image;
   aSprite->nbFrames += 1;
+  if (aSprite->currentFrame == 0)
+    aSprite->currentFrame = aSprite->imageFrames[0];
   return 0;
 }
 
@@ -725,5 +729,81 @@ int ansigraphic_animatedSprite_pushFrame_RGB(ansigraphic_animatedSprite_RGB_t* a
   }
   aSprite->imageFrames[aSprite->nbFrames] = image;
   aSprite->nbFrames += 1;
+  if (aSprite->currentFrame == 0)
+    aSprite->currentFrame = aSprite->imageFrames[0];
   return 0;
+}
+
+int ansigraphic_animatedSprite_tick(ansigraphic_animatedSprite_t* aSprite,
+				    unsigned long elapsed_ms) {
+  aSprite->timer = (aSprite->timer + elapsed_ms) % (aSprite->nbFrames*aSprite->frameRate);
+  aSprite->currentFrame = aSprite->imageFrames[aSprite->timer / aSprite->frameRate];
+}
+
+int ansigraphic_animatedSprite_tick_RGB(ansigraphic_animatedSprite_RGB_t* aSprite,
+					unsigned long elapsed_ms) {
+  aSprite->timer = (aSprite->timer + elapsed_ms) % (aSprite->nbFrames*aSprite->frameRate);
+  aSprite->currentFrame = aSprite->imageFrames[aSprite->timer / aSprite->frameRate];
+}
+
+void ansigraphic_animatedSpritePrint(ansigraphic_image_t* dest,
+				     ansigraphic_animatedSprite_t* src) {
+  int x, xlim;
+  int y, ylim;
+  char *pixelDest, *pixelSrc;
+
+  y = 0;
+  while (src->xy.y + y < dest->height && y < src->currentFrame->height) {
+    x = 0;
+    while (src->xy.x + x < dest->width && x < src->currentFrame->width) {
+      pixelDest=dest->pixels[(src->xy.x + x) + ((src->xy.y + y)*dest->width)].pixel;
+      pixelSrc=src->currentFrame->pixels[x + (y*src->currentFrame->width)].pixel;
+      pixelDest[7] = pixelSrc[7];
+      pixelDest[8] = pixelSrc[8];
+      pixelDest[9] = pixelSrc[9];
+      pixelDest[16] = pixelSrc[16];
+      pixelDest[17] = pixelSrc[17];
+      pixelDest[18] = pixelSrc[18];
+      pixelDest[20] = pixelSrc[20];
+      ++x;
+    }
+    ++y;
+  }
+}
+
+void ansigraphic_animatedSpritePrint_RGB(ansigraphic_image_RGB_t* dest,
+					 ansigraphic_animatedSprite_RGB_t* src) {
+  int x, xlim;
+  int y, ylim;
+  char *pixelDest, *pixelSrc;
+
+  y = 0;
+  while (src->xy.y + y < dest->height && y < src->currentFrame->height) {
+    x = 0;
+    while (src->xy.x + x < dest->width && x < src->currentFrame->width) {
+      pixelDest=dest->pixels[(src->xy.x + x) + ((src->xy.y + y)*dest->width)].pixel;
+      pixelSrc=src->currentFrame->pixels[x + (y*src->currentFrame->width)].pixel;
+      pixelDest[7] = pixelSrc[7];
+      pixelDest[8] = pixelSrc[8];
+      pixelDest[9] = pixelSrc[9];
+      pixelDest[11] = pixelSrc[11];
+      pixelDest[12] = pixelSrc[12];
+      pixelDest[13] = pixelSrc[13];
+      pixelDest[15] = pixelSrc[15];
+      pixelDest[16] = pixelSrc[16];
+      pixelDest[17] = pixelSrc[17];
+      pixelDest[24] = pixelSrc[24];
+      pixelDest[25] = pixelSrc[25];
+      pixelDest[26] = pixelSrc[26];
+      pixelDest[28] = pixelSrc[28];
+      pixelDest[29] = pixelSrc[29];
+      pixelDest[30] = pixelSrc[30];
+      pixelDest[32] = pixelSrc[32];
+      pixelDest[33] = pixelSrc[33];
+      pixelDest[34] = pixelSrc[34];
+      pixelDest[36] = pixelSrc[36];
+      ++x;
+    }
+    ++y;
+  }
 }

@@ -54,7 +54,7 @@ extern "C" {
     ansigraphic_image_t* currentFrame;
     unsigned int nbFrames;
     unsigned int frameRate;
-    unsigned int timer;
+    unsigned long timer;
     ansigraphic_ivector2_t xy;
   } ansigraphic_animatedSprite_t;
 
@@ -63,7 +63,7 @@ extern "C" {
     ansigraphic_image_RGB_t* currentFrame;
     unsigned int nbFrames;
     unsigned int frameRate;
-    unsigned int timer;
+    unsigned long timer;
     ansigraphic_ivector2_t xy;
   } ansigraphic_animatedSprite_RGB_t;
 
@@ -140,6 +140,14 @@ extern "C" {
 					   ansigraphic_image_t* image);
   int ansigraphic_animatedSprite_pushFrame_RGB(ansigraphic_animatedSprite_RGB_t* aSprite,
 					       ansigraphic_image_RGB_t* image);
+  int ansigraphic_animatedSprite_tick(ansigraphic_animatedSprite_t* aSprite,
+				      unsigned long elapsed_ms);
+  int ansigraphic_animatedSprite_tick_RGB(ansigraphic_animatedSprite_RGB_t* aSprite,
+					  unsigned long elapsed_ms);  
+  void ansigraphic_animatedSpritePrint(ansigraphic_image_t* dest,
+				       ansigraphic_animatedSprite_t* src);
+  void ansigraphic_animatedSpritePrint_RGB(ansigraphic_image_RGB_t* dest,
+					   ansigraphic_animatedSprite_RGB_t* src);
   
 #ifdef _cplusplus
 }
