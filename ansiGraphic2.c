@@ -661,6 +661,53 @@ void ansigraphic_deleteSprite_RGB(ansigraphic_sprite_RGB_t* sprite) {
   free(sprite);
 }
 
-void ansigraphic_animatedSprite_pushFrame(ansigraphic_animatedSprite_t* aSprite,
-					  ansigraphic_image_t* image) {
+ansigraphic_animatedSprite_t* ansigraphic_newAnimatedSprite() {
+  ansigraphic_animatedSprite_t* aSprite;
+
+  if ((aSprite = malloc(sizeof(ansigraphic_animatedSprite_t))) != 0) {
+    aSprite->imageFrames = 0;
+    aSprite->currentFrame = 0;
+    aSprite->nbFrames = 0;
+    aSprite->frameRate = 1000;
+    aSprite->timer = 0;
+    aSprite->xy.x = 0;
+    aSprite->xy.y = 0;
+  }
+  return aSprite;
+}
+
+ansigraphic_animatedSprite_RGB_t* ansigraphic_newAnimatedSprite_RGB() {
+  ansigraphic_animatedSprite_RGB_t* aSprite;
+
+  if ((aSprite = malloc(sizeof(ansigraphic_animatedSprite_RGB_t))) != 0) {
+    aSprite->imageFrames = 0;
+    aSprite->currentFrame = 0;
+    aSprite->nbFrames = 0;
+    aSprite->frameRate = 1000;
+    aSprite->timer = 0;
+    aSprite->xy.x = 0;
+    aSprite->xy.y = 0;
+  }
+  return aSprite;
+}
+
+void ansigraphic_deleteAniamtedSprite(ansigraphic_animatedSprite_t* aSprite) {
+  if (aSprite->imageFrames != 0)
+    free(aSprite->imageFrames);
+  free(aSprite);
+}
+
+void ansigraphic_deleteAnimatedSprite_RGB(ansigraphic_animatedSprite_RGB_t* aSprite) {
+  if (aSprite->imageFrames != 0)
+    free(aSprite->imageFrames);
+  free(aSprite);
+}
+
+
+int ansigraphic_animatedSprite_pushFrame(ansigraphic_animatedSprite_t* aSprite,
+					 ansigraphic_image_t* image) {
+}
+
+int ansigraphic_animatedSprite_pushFrame_RGB(ansigraphic_animatedSprite_RGB_t* aSprite,
+					     ansigraphic_image_RGB_t* image) {
 }
