@@ -17,6 +17,18 @@ void ansigraphic_pixelSetColor(ansigraphic_image_t* image,
   pixel[18] = bgColor[2];
 }
 
+void ansigraphic_pixelGetColor(ansigraphic_image_t* image,
+			       ansigraphic_ivector2_t* xy,
+			       char* fgColor,
+			       char* bgColor) {
+  char* pixel = image->pixels[image->height-1-xy->y][xy->x].pixel;
+  fgColor[0] = pixel[7];
+  fgColor[1] = pixel[8];
+  fgColor[2] = pixel[9];
+  bgColor[0] = pixel[16];
+  bgColor[1] = pixel[17];
+  bgColor[2] = pixel[18];
+}
 void ansigraphic_pixelSetColor_RGB(ansigraphic_image_RGB_t* image,
 				   ansigraphic_ivector2_t* xy,
 				   ansigraphic_color_RGB_t* fgColor,

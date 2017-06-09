@@ -71,6 +71,10 @@ extern "C" {
 				 ansigraphic_ivector2_t* xy,
 				 char* fgColor,
 				 char* bgColor);
+  void ansigraphic_pixelGetColor(ansigraphic_image_t* image,
+				 ansigraphic_ivector2_t* xy,
+				 char* fgColor,
+				 char* bgColor);
   void ansigraphic_pixelSetColor_RGB(ansigraphic_image_RGB_t* image,
 				     ansigraphic_ivector2_t* xy,
 				     ansigraphic_color_RGB_t* fgColor,
