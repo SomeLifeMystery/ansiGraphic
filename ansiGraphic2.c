@@ -289,7 +289,7 @@ ansigraphic_image_t* ansigraphic_newImage(int32_t width,
       pixel[24] = 'm';
       if (x + 1 < width) {
 	pixel[25] = '\033';
-	pixel[26] = '_';
+	pixel[26] = 'X';
       } else {
 	pixel[25] = '\r';
 	pixel[26] = '\n';
@@ -363,7 +363,7 @@ ansigraphic_image_RGB_t* ansigraphic_newImage_RGB(int32_t width,
       pixel[40] = 'm';
       if (x + 1 < width) {
 	pixel[41] = '\033';
-	pixel[42] = '_';
+	pixel[42] = 'X';
       } else {
 	pixel[41] = '\r';
 	pixel[42] = '\n';
