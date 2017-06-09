@@ -1,5 +1,5 @@
 #include <unistd.h>
-#include "ansiGraphic2.h"
+#include "ansiGraphic2.1.h"
 
 int main(int ac, char**av) {
   ansigraphic_image_t* img = ansigraphic_readBmp(av[1]);

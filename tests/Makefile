@@ -1,5 +1,5 @@
 INCLUDE= -I../
-COMMON_SRC= ../ansiGraphic2.c
+COMMON_SRC= ../ansiGraphic2.1.c
 
 all:
 	rm -f test_bmp && gcc -o test_bmp $(INCLUDE) $(COMMON_SRC) bmp.c

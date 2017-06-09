@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <math.h>
-#include "ansiGraphic2.h"
+#include "ansiGraphic2.1.h"
 
 int main() {
   const int width = 60;

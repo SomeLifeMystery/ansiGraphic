@@ -21,7 +21,7 @@ void ansigraphic_pixelSetColor_RGB(ansigraphic_image_RGB_t* image,
 				   ansigraphic_ivector2_t* xy,
 				   ansigraphic_color_RGB_t* fgColor,
 				   ansigraphic_color_RGB_t* bgColor) {
-  char* pixel = image->pixels[xy->x + ((image->height-1-xy->y)*image->width)].pixel;
+  char* pixel = image->pixels[image->height-1-xy->y][xy->x].pixel;
   pixel[7] = (*fgColor)[0][0];
   pixel[8] = (*fgColor)[0][1];
   pixel[9] = (*fgColor)[0][2];
@@ -46,7 +46,7 @@ void ansigraphic_pixelGetColor_RGB(ansigraphic_image_RGB_t* image,
 				   ansigraphic_ivector2_t* xy,
 				   ansigraphic_color_RGB_t* fgColor,
 				   ansigraphic_color_RGB_t* bgColor) {
-  char* pixel = image->pixels[xy->x + ((image->height-1-xy->y)*image->width)].pixel;
+  char* pixel = image->pixels[image->height-1-xy->y][xy->x].pixel;
   (*fgColor)[0][0] = pixel[7];
   (*fgColor)[0][1] = pixel[8];
   (*fgColor)[0][2] = pixel[9];
@@ -77,7 +77,7 @@ void ansigraphic_pixelSetValue(ansigraphic_image_t* image,
 void ansigraphic_pixelSetValue_RGB(ansigraphic_image_RGB_t* image,
 				   ansigraphic_ivector2_t* xy,
 				   char value) {
-  char* pixel = image->pixels[xy->x + ((image->height-1-xy->y)*image->width)].pixel;
+  char* pixel = image->pixels[image->height-1-xy->y][xy->x].pixel;
   pixel[36] = value;
 }
 
@@ -88,7 +88,7 @@ void ansigraphic_imagePrint(ansigraphic_image_t* image) {
 
 void ansigraphic_imagePrint_RGB(ansigraphic_image_RGB_t* image) {
   write(1, "\033[u", 3);
-  write(1, image->pixels, sizeof(ansigraphic_pixel_RGB_t)*image->width*image->height);
+  write(1, (*image->pixels), (sizeof(ansigraphic_pixel_RGB_t)*(image->width)*(image->height))+((image->height)*2));
 }
 
 void ansigraphic_imageClear(ansigraphic_image_t* image) {
@@ -119,7 +119,7 @@ void ansigraphic_imageClear_RGB(ansigraphic_image_RGB_t* image) {
   while (++y < height) {
     x = -1;
     while (++x < width) {
-      pixel = image->pixels[x + (y*width)].pixel;
+      pixel = image->pixels[y][x].pixel;
       pixel[7] = '0';
       pixel[8] = '0';
       pixel[9] = '0';
@@ -177,7 +177,7 @@ void ansigraphic_imageFill_RGB(ansigraphic_image_RGB_t* image,
   while (++y < height) {
     x = -1;
     while (++x < width) {
-      pixel = image->pixels[x + (y*width)].pixel;
+      pixel = image->pixels[y][x].pixel;
       pixel[7] = (*fgColor)[0][0];
       pixel[8] = (*fgColor)[0][1];
       pixel[9] = (*fgColor)[0][2];
@@ -263,7 +263,7 @@ ansigraphic_image_t* ansigraphic_newImage(int32_t width,
   write(1, "\033[2J\033[0;0f\033[s", 13);
   y = -1;
   while (++y < height) {
-    image->pixels[y] = (*image->pixels) + (y*(width+2));
+    image->pixels[y] = (void*)(*image->pixels) + (y*(width*sizeof(ansigraphic_pixel_t)+2));
     x = -1;
     while (++x < width) {
       pixel = image->pixels[y][x].pixel;
@@ -308,7 +308,11 @@ ansigraphic_image_RGB_t* ansigraphic_newImage_RGB(int32_t width,
   char* pixel;
   if (image == 0)
     return 0;
-  else if ((image->pixels = (ansigraphic_pixel_RGB_t*)malloc(sizeof(ansigraphic_pixel_RGB_t)*width*height)) == 0) {
+  else if ((image->pixels = (ansigraphic_pixel_RGB_t**)malloc(sizeof(ansigraphic_pixel_RGB_t*)*height)) == 0) {
+    free(image);
+    return 0;
+  } else if (((*image->pixels) = (ansigraphic_pixel_RGB_t*)malloc((sizeof(ansigraphic_pixel_RGB_t)*height*width)+(height*2))) == 0) {
+    free(image->pixels);
     free(image);
     return 0;
   }
@@ -316,12 +320,12 @@ ansigraphic_image_RGB_t* ansigraphic_newImage_RGB(int32_t width,
   image->height = height;
 
   write(1, "\033[2J\033[0;0f\033[s", 13);
-  
   y = -1;
   while (++y < height) {
+    image->pixels[y] = (void*)(*image->pixels) + (y*(width*sizeof(ansigraphic_pixel_RGB_t)+2));
     x = -1;
     while (++x < width) {
-      pixel = image->pixels[x + (y*width)].pixel;
+      pixel = image->pixels[y][x].pixel;
       pixel[0] = '\033';
       pixel[1] = '[';
       pixel[2] = '3';
@@ -363,10 +367,7 @@ ansigraphic_image_RGB_t* ansigraphic_newImage_RGB(int32_t width,
       pixel[38] = '[';
       pixel[39] = '0';
       pixel[40] = 'm';
-      if (x + 1 < width) {
-	pixel[41] = '\033';
-	pixel[42] = 'X';
-      } else {
+      if (x + 1 >= width) {
 	pixel[41] = '\r';
 	pixel[42] = '\n';
       }
@@ -381,6 +382,7 @@ void ansigraphic_deleteImage(ansigraphic_image_t* image) {
   free(image);
 }
 void ansigraphic_deleteImage_RGB(ansigraphic_image_RGB_t* image) {
+  free((*image->pixels));
   free(image->pixels);
   free(image);
 }
@@ -609,8 +611,8 @@ void ansigraphic_spritePrint_RGB(ansigraphic_image_RGB_t* dest,
   while (src->xy.y + y < dest->height && y < src->image->height) {
     x = 0;
     while (src->xy.x + x < dest->width && x < src->image->width) {
-      pixelDest=dest->pixels[(src->xy.x + x) + ((src->xy.y + y)*dest->width)].pixel;
-      pixelSrc=src->image->pixels[x + (y*src->image->width)].pixel;
+      pixelDest=dest->pixels[src->xy.y + y][src->xy.x + x].pixel;
+      pixelSrc=src->image->pixels[y][x].pixel;
       pixelDest[7] = pixelSrc[7];
       pixelDest[8] = pixelSrc[8];
       pixelDest[9] = pixelSrc[9];
@@ -784,8 +786,8 @@ void ansigraphic_animatedSpritePrint_RGB(ansigraphic_image_RGB_t* dest,
   while (src->xy.y + y < dest->height && y < src->currentFrame->height) {
     x = 0;
     while (src->xy.x + x < dest->width && x < src->currentFrame->width) {
-      pixelDest=dest->pixels[(src->xy.x + x) + ((src->xy.y + y)*dest->width)].pixel;
-      pixelSrc=src->currentFrame->pixels[x + (y*src->currentFrame->width)].pixel;
+      pixelDest=dest->pixels[src->xy.y + y][src->xy.x + x].pixel;
+      pixelSrc=src->currentFrame->pixels[y][x].pixel;
       pixelDest[7] = pixelSrc[7];
       pixelDest[8] = pixelSrc[8];
       pixelDest[9] = pixelSrc[9];

@@ -22,7 +22,7 @@ extern "C" {
   } ansigraphic_pixel_t;
 
   typedef struct s_ansigraphic_pixel_RGB {
-    char pixel[43];
+    char pixel[41];
   } ansigraphic_pixel_RGB_t;
 
   typedef char ansigraphic_color_RGB_t[3][3];
@@ -36,7 +36,7 @@ extern "C" {
   typedef struct s_ansigraphic_image_RGB {
     int width;
     int height;
-    ansigraphic_pixel_RGB_t* pixels;
+    ansigraphic_pixel_RGB_t** pixels;
   } ansigraphic_image_RGB_t;
 
   typedef struct s_ansigraphic_sprite {

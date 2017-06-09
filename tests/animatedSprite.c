@@ -1,6 +1,6 @@
 #include <time.h>
 
-#include "ansiGraphic2.h"
+#include "ansiGraphic2.1.h"
 
 int main() {
   ansigraphic_ivector2_t xy; xy.x=0; xy.y=0;
